@@ -9,7 +9,6 @@ public class EagleBladecaller : SkillModel
     private bool _isStarted;
 
     private bool _isCurved;
-    private int _count;
 
     public EagleBladecaller()
     {
@@ -22,7 +21,6 @@ public class EagleBladecaller : SkillModel
         _isStarted = false;
         _isCurved = false;
 
-        _count = 0;
         
     }
 
@@ -44,10 +42,16 @@ public class EagleBladecaller : SkillModel
     public void Bladecaller()
     {
         var target = GameObject.FindGameObjectWithTag("Eagle");
-        Vector3 dirForwardBoss = target.transform.position - this.transform.position;
+        Vector2 dirForwardBoss = target.transform.position - this.transform.position;
         
         transform.Translate(dirForwardBoss.normalized * Time.deltaTime * _speed);
-
+        
+        if (dirForwardBoss.magnitude <= 0.1f)
+        {
+            
+            //Debug.Log(dirForwardBoss.magnitude);
+            gameObject.SetActive(false);
+        }
     }
 
     IEnumerator WaitCalling()
@@ -79,19 +83,17 @@ public class EagleBladecaller : SkillModel
         {
             StartCoroutine(WaitCalling());
         }
-
-
     }
 
-    private void Start()
-    {
-        pointA = GameObject.Find("Eagle").transform.position;
-        //pointC = GameObject.Find("Player").transform.position;
-        pointC = Camera.main.ViewportToWorldPoint(new Vector3(0, Random.Range(0f, 1f), 0));
+    //private void Start()
+    //{
+    //    pointA = GameObject.Find("Eagle").transform.position;
+    //    //pointC = GameObject.Find("Player").transform.position;
+    //    pointC = Camera.main.ViewportToWorldPoint(new Vector3(0, Random.Range(0f, 1f), 0));
         
-        pointB = new Vector3(Random.Range(pointA.x, pointC.x), Camera.main.ViewportToWorldPoint(new Vector3(0, Random.Range(0f, 1f), 0)).y, 0);
-        CalculateCurvePoints(75);
-    }
+    //    pointB = new Vector3(Random.Range(pointA.x, pointC.x), Camera.main.ViewportToWorldPoint(new Vector3(0, Random.Range(0f, 1f), 0)).y, 0);
+    //    CalculateCurvePoints(75);
+    //}
         
     public Vector3 pointA;
     public Vector3 pointB;
@@ -125,14 +127,23 @@ public class EagleBladecaller : SkillModel
 
     IEnumerator Curve()
     {
-        int a = 0;
+        
         foreach(var item in curvePoints)
         {
-            Debug.Log(item);
             
             this.transform.position = item;
             yield return new WaitForEndOfFrame();
             
         }
+        
+    }
+
+    public override void Cast()
+    {
+        pointA = GameObject.Find("Eagle").transform.position;
+        //pointC = GameObject.Find("Player").transform.position;
+        pointC = Camera.main.ViewportToWorldPoint(new Vector3(0, Random.Range(0f, 1f), -Camera.main.transform.position.z));
+        pointB = new Vector3(Random.Range(pointA.x, pointC.x), Camera.main.ViewportToWorldPoint(new Vector3(0, Random.Range(0f, 1f), 0)).y, 0);
+        CalculateCurvePoints(100);
     }
 }

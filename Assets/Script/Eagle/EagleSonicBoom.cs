@@ -4,38 +4,63 @@ using UnityEngine;
 
 public class EagleSonicBoom : SkillModel
 {
+    private float _speed;
+    private bool _firstTargetPosition;
+    private bool _secondTargetPosition;
+    private bool _thirdTargetPosition;
+    private bool _finalTargetPosition;
     public EagleSonicBoom()
     {
-        Name = "SonicBoom";
-        IsCanParrying = true;
-        Damage = 1;
-
+        _speed = 10;
     }
 
     public override void Cast()
     {
-        this.transform.position =  Camera.main.ViewportToWorldPoint(new Vector3(0.25f, 0.5f, 0));
+        //this.transform.parent.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.9f, 0.9f, -Camera.main.transform.position.z));
     }
-
-    private void Start()
+    // Update is called once per frame
+    void Update()
     {
 
-        StartCoroutine(DelayNextAttack());
-    }
+        var firstDir = Camera.main.ViewportToWorldPoint(new Vector3(0.1f, 0.9f, -Camera.main.transform.position.z)) - GameObject.Find("Eagle").transform.position;
+        if (firstDir.magnitude >= 0.1f && !_firstTargetPosition)
+        {
+            this.transform.parent.transform.Translate(firstDir.normalized * Time.deltaTime * _speed);
+        }
+        else
+        {
+            _firstTargetPosition = true;
+        }
 
-    private void Update()
-    {
+        var secondDir = Camera.main.ViewportToWorldPoint(new Vector3(0.9f, 0.1f, -Camera.main.transform.position.z)) - GameObject.Find("Eagle").transform.position;
+        if (secondDir.magnitude >= 0.1f && !_secondTargetPosition && _firstTargetPosition)
+        {
+            this.transform.parent.transform.Translate(secondDir.normalized * Time.deltaTime * _speed);
+        }
+        
+        if(secondDir.magnitude < 0.1f)
+        {
+            _secondTargetPosition = true;
+        }
 
-    }
+        //var thirdDir = Camera.main.ViewportToWorldPoint(new Vector3(0.1f, 0.1f, -Camera.main.transform.position.z)) - GameObject.Find("Eagle").transform.position;
+        //if (thirdDir.magnitude >= 0.1f && !_thirdTargetPosition && _secondTargetPosition)
+        //{
+        //    this.transform.parent.transform.Translate(thirdDir.normalized * Time.deltaTime * _speed);
+        //}
+        //else
+        //{
+        //    _thirdTargetPosition = true;
+        //}
 
-    IEnumerator DelayNextAttack()
-    {
-        this.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.25f, 0.5f, 0));
-        yield return new WaitForSeconds(5);
-        this.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.25f, 0));
-        yield return new WaitForSeconds(5);
-        this.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.75f, 0));
-        yield return new WaitForSeconds(5);
-        this.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.75f, 0.5f, 0));
+        //var finalDir = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.9f, -Camera.main.transform.position.z)) - GameObject.Find("Eagle").transform.position;
+        //if (finalDir.magnitude >= 0.1f && !_finalTargetPosition && _thirdTargetPosition)
+        //{
+        //    this.transform.parent.transform.Translate(finalDir.normalized * Time.deltaTime * _speed);
+        //}
+        //else
+        //{
+        //    _finalTargetPosition = true;
+        //}
     }
 }

@@ -4,75 +4,84 @@ using System.Diagnostics;
 using System.Timers;
 using UnityEngine;
 
-public class EagleSkill : SkillModel
+public class EagleSkill : MonoBehaviour
 {
-    private Timer _timer;
-    private bool _isPlayerIn;
-    private bool _isStarted;
+    public List<GameObject> Skill;
+    private List<GameObject> _feathers;
+    private bool _isDelay;
+    private GameObject _fly;
+    private GameObject _tornado;
+    private GameObject _sonicBoom;
+    private bool SkillRunnig;
 
     public EagleSkill()
     {
-        Name = "tornado";
-        IsCanParrying = false;
-        Damage = 1;
-        HoldingTime = 5;
-        _timer = new Timer();
-        _timer.Interval = 1000;
-        _timer.Elapsed += TickDamage;
-        _isPlayerIn = false;
-        _isStarted = true;
+        Skill = new List<GameObject>();
+        _feathers = new List<GameObject>();
+        
+        _isDelay = false;
+        SkillRunnig = false;
     }
 
-    public override void Cast()
+    // Start is called before the first frame update
+    void Start()
     {
-        if (_isStarted)
+        for (int i = 0; i < 10; i++)
         {
-            StartCoroutine(holdingSkill());
+            var feather = Instantiate(Skill[0]);
+            feather.SetActive(false);
+            _feathers.Add(feather);
+            //a.GetComponent<EagleBladecaller>().Cast();
+        }
+        _tornado = Instantiate(Skill[1]);
+        _tornado.SetActive(false);
+
+        
+        _fly = Instantiate(Skill[2]);
+        _fly.SetActive(false);
+
+        _sonicBoom = Instantiate(Skill[3]);       
+        _sonicBoom.transform.SetParent(GameObject.Find("Eagle").transform);
+        _sonicBoom.transform.localPosition = Vector3.zero;
+        _sonicBoom.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //if (!SkillRunnig)
+        //{
+        //    _fly.GetComponent<EagleFly>().Cast();
+        //    SkillRunnig = true;
+        //}
+
+        if (!SkillRunnig)
+        {
+            _sonicBoom.SetActive(true);
+            _sonicBoom.GetComponent<EagleSonicBoom>().Cast();
+            SkillRunnig = true;
         }
 
-        var target = GameObject.FindGameObjectWithTag("Player");
-        Vector3 dirForwardTornado = this.transform.position - target.transform.position;
-        //target.GetComponent<Rigidbody2D>().AddForce(dirForwardTornado * Time.deltaTime, ForceMode2D.Force );
-        target.transform.Translate(dirForwardTornado * Time.deltaTime);
+
+
+
+        //if (!_isDelay)
+        //{
+        //    StartCoroutine(Delay());
+        //}
+
+
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    IEnumerator Delay()
     {
-        if (collision.CompareTag("Player"))
+        _isDelay = true;
+        yield return new WaitForSeconds(3);
+        foreach (var item in _feathers)
         {
-            _isPlayerIn = true;
+            item.SetActive(true);
+            item.GetComponent<EagleBladecaller>().Cast();
         }
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            _isPlayerIn = false;
-        }
-    }
-
-    private void TickDamage(object sender, ElapsedEventArgs e)
-    {
-        if (_isPlayerIn)
-        {
-            //데미지를 주는 코드
-            UnityEngine.Debug.Log("데미지를 입었습니다");
-        }
-    }
-
-    private IEnumerator holdingSkill()
-    {
-        _timer.Start();
-        _isStarted = false;
-        yield return new WaitForSeconds(5);
-        UnityEngine.Debug.Log("stop");
-        _timer.Stop();
-    }
-
-    // 테스트용
-    private void Update()
-    {
-        Cast();
-    }
+    
 }
