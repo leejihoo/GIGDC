@@ -11,6 +11,7 @@ public class EagleSonicBoom : SkillModel
     private bool _finalTargetPosition;
     public EagleSonicBoom()
     {
+        Name = "SonicBoom";
         _speed = 10;
     }
 
@@ -27,7 +28,8 @@ public class EagleSonicBoom : SkillModel
         {
             this.transform.parent.transform.Translate(firstDir.normalized * Time.deltaTime * _speed);
         }
-        else
+        
+        if(firstDir.magnitude < 0.1f)
         {
             _firstTargetPosition = true;
         }
@@ -43,24 +45,26 @@ public class EagleSonicBoom : SkillModel
             _secondTargetPosition = true;
         }
 
-        //var thirdDir = Camera.main.ViewportToWorldPoint(new Vector3(0.1f, 0.1f, -Camera.main.transform.position.z)) - GameObject.Find("Eagle").transform.position;
-        //if (thirdDir.magnitude >= 0.1f && !_thirdTargetPosition && _secondTargetPosition)
-        //{
-        //    this.transform.parent.transform.Translate(thirdDir.normalized * Time.deltaTime * _speed);
-        //}
-        //else
-        //{
-        //    _thirdTargetPosition = true;
-        //}
+        var thirdDir = Camera.main.ViewportToWorldPoint(new Vector3(0.1f, 0.1f, -Camera.main.transform.position.z)) - GameObject.Find("Eagle").transform.position;
+        if (thirdDir.magnitude >= 0.1f && !_thirdTargetPosition && _secondTargetPosition)
+        {
+            this.transform.parent.transform.Translate(thirdDir.normalized * Time.deltaTime * _speed);
+        }
+        
+        if(thirdDir.magnitude < 0.1f)
+        {
+            _thirdTargetPosition = true;
+        }
 
-        //var finalDir = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.9f, -Camera.main.transform.position.z)) - GameObject.Find("Eagle").transform.position;
-        //if (finalDir.magnitude >= 0.1f && !_finalTargetPosition && _thirdTargetPosition)
-        //{
-        //    this.transform.parent.transform.Translate(finalDir.normalized * Time.deltaTime * _speed);
-        //}
-        //else
-        //{
-        //    _finalTargetPosition = true;
-        //}
+        var finalDir = Camera.main.ViewportToWorldPoint(new Vector3(0.9f, 0.5f, -Camera.main.transform.position.z)) - GameObject.Find("Eagle").transform.position;
+        if (finalDir.magnitude >= 0.1f && !_finalTargetPosition && _thirdTargetPosition)
+        {
+            this.transform.parent.transform.Translate(finalDir.normalized * Time.deltaTime * _speed);
+        }
+        
+        if(finalDir.magnitude < 0.1f)
+        {
+            _finalTargetPosition = true;
+        }
     }
 }
