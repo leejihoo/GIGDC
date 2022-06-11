@@ -13,6 +13,28 @@ public class CatSkill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Assassination();
+    }
+
+    public void Assassination()
+    {
+        var assassination = gameObject.transform.GetChild(0);
+        assassination.gameObject.SetActive(true);
+        assassination.GetComponent<CatAssassination>().Cast();
+    }
+
+    public void Chattering()
+    {
+
+    }
+
+    public void Grooming()
+    {
+
+    }
+
+    public void HairBall()
+    {
+
     }
 }

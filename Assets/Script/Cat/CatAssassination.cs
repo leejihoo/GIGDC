@@ -27,7 +27,7 @@ public class CatAssassination : SkillModel
     void Start()
     {
         //GameObject.Find("PlayerSpotLight").SetActive(false);
-        GameObject.Find("Player").transform.GetChild(0).gameObject.SetActive(true);
+        //GameObject.Find("Player").transform.GetChild(0).gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -38,12 +38,20 @@ public class CatAssassination : SkillModel
             StartCoroutine(AttackOrder());
         }
 
-        _dir = _playerPos - GameObject.Find("Cat").transform.position;
-        
-        if (_dir.magnitude >= 0.1f )
+        if (GameObject.Find("GlobalLight").GetComponent<UnityEngine.Rendering.Universal.Light2D>().intensity >= 0)
         {
-            this.transform.parent.transform.Translate(_dir.normalized * Time.deltaTime * _speed);
+            GameObject.Find("GlobalLight").GetComponent<UnityEngine.Rendering.Universal.Light2D>().intensity -= 0.002f;
         }
+        else
+        {
+            _dir = _playerPos - GameObject.Find("Cat").transform.position;
+
+            if (_dir.magnitude >= 0.1f)
+            {
+                this.transform.parent.transform.Translate(_dir.normalized * Time.deltaTime * _speed);
+            }
+        }
+        
 
         //var secondDir = _playerPos - GameObject.Find("Cat").transform.position;
         //if (secondDir.magnitude >= 0.1f && !_secondTargetPosition)
