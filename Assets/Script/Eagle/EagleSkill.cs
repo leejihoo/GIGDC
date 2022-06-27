@@ -7,43 +7,32 @@ using UnityEngine;
 public class EagleSkill : MonoBehaviour
 {
     public List<GameObject> Skill;
+    public bool IsDelay;
+    public bool SkillRunnig;
+
     private List<GameObject> _feathers;
-    private bool _isDelay;
     private GameObject _fly;
     private GameObject _tornado;
     private GameObject _sonicBoom;
-    private bool SkillRunnig;
+    
 
+    enum skillType
+    {
+        FEATHER, FLY, TORNADO, SONICBOOM
+    }
     public EagleSkill()
     {
         Skill = new List<GameObject>();
         _feathers = new List<GameObject>();
         
-        _isDelay = false;
+        IsDelay = false;
         SkillRunnig = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 10; i++)
-        {
-            var feather = Instantiate(Skill[0]);
-            feather.SetActive(false);
-            _feathers.Add(feather);
-            //a.GetComponent<EagleBladecaller>().Cast();
-        }
-        _tornado = Instantiate(Skill[1]);
-        _tornado.SetActive(false);
-
-        
-        _fly = Instantiate(Skill[2]);
-        _fly.SetActive(false);
-
-        _sonicBoom = Instantiate(Skill[3]);       
-        _sonicBoom.transform.SetParent(GameObject.Find("Eagle").transform);
-        _sonicBoom.transform.localPosition = Vector3.zero;
-        _sonicBoom.SetActive(false);
+        SkillCreate();
     }
 
     // Update is called once per frame
@@ -55,33 +44,85 @@ public class EagleSkill : MonoBehaviour
         //    SkillRunnig = true;
         //}
 
-        if (!SkillRunnig)
-        {
-            _sonicBoom.SetActive(true);
-            _sonicBoom.GetComponent<EagleSonicBoom>().Cast();
-            SkillRunnig = true;
-        }
+        //if (!SkillRunnig)
+        //{
+        //    _sonicBoom.SetActive(true);
+        //    _sonicBoom.GetComponent<EagleSonicBoom>().Cast();
+        //    SkillRunnig = true;
+        //}
 
-
-
-
-        //if (!_isDelay)
+        //if (!IsDelay)
         //{
         //    StartCoroutine(Delay());
         //}
 
-
+        if (!SkillRunnig)
+        {
+            if(!IsDelay)
+                StartCoroutine(Delay());
+        }
     }
 
     IEnumerator Delay()
     {
-        _isDelay = true;
-        yield return new WaitForSeconds(3);
-        foreach (var item in _feathers)
+        IsDelay = true;
+        yield return new WaitForSeconds(2);
+        //var randomSkillIndex = Random.Range(0, 3);
+        var randomSkillIndex = 0;
+        switch (randomSkillIndex)
         {
-            item.SetActive(true);
-            item.GetComponent<EagleBladecaller>().Cast();
+            case (int)skillType.FEATHER:
+                UnityEngine.Debug.Log("feather");
+                foreach (var feather in _feathers)
+                {
+                    feather.SetActive(true);
+                    feather.GetComponent<EagleBladecaller>().Cast();
+                }
+                SkillRunnig = true;
+                break;
+            case (int)skillType.TORNADO:
+                UnityEngine.Debug.Log("_tornado");
+                _tornado.SetActive(true);
+                _tornado.GetComponent<EagleTornado>().Cast();
+                SkillRunnig = true;
+                break;
+            case (int)skillType.FLY:
+                UnityEngine.Debug.Log("_fly");
+                _fly.SetActive(true);
+                _fly.GetComponent<EagleFly>().Cast();
+                SkillRunnig = true;
+                break;
+            case (int)skillType.SONICBOOM:
+                UnityEngine.Debug.Log("_sonicBoom");
+                _sonicBoom.SetActive(true);
+                _sonicBoom.GetComponent<EagleSonicBoom>().Cast();
+                SkillRunnig = true;
+                break;
+
         }
+
+    }
+
+    void SkillCreate()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            var feather = Instantiate(Skill[0]);
+            feather.SetActive(false);
+            _feathers.Add(feather);
+        }
+
+        _tornado = Instantiate(Skill[1]);
+        _tornado.SetActive(false);
+
+
+        _fly = Instantiate(Skill[2]);
+        _fly.SetActive(false);
+
+        _sonicBoom = Instantiate(Skill[3]);
+        _sonicBoom.transform.SetParent(GameObject.Find("Eagle").transform);
+        _sonicBoom.transform.localPosition = Vector3.zero;
+        _sonicBoom.SetActive(false);
     }
     
 }

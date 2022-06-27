@@ -7,8 +7,8 @@ public class EagleBladecaller : SkillModel
     private float _speed;
     private bool _isCalled;
     private bool _isStarted;
-
     private bool _isCurved;
+    static private bool _isDelay;
 
     public EagleBladecaller()
     {
@@ -20,8 +20,10 @@ public class EagleBladecaller : SkillModel
         _isCalled = false;
         _isStarted = false;
         _isCurved = false;
+        _isDelay = false;
 
-        
+
+
     }
 
     public void FlyingFeathers()
@@ -48,8 +50,17 @@ public class EagleBladecaller : SkillModel
         
         if (dirForwardBoss.magnitude <= 0.1f)
         {
-            
+
             //Debug.Log(dirForwardBoss.magnitude);
+            GameObject.Find("Eagle").GetComponent<EagleSkill>().SkillRunnig = false;
+            if (!_isDelay)
+            {
+                _isDelay = true;
+                GameObject.Find("Eagle").GetComponent<EagleSkill>().IsDelay = false;
+            }
+            _isCalled = false;
+            _isCurved = false;
+            _isStarted = false;
             gameObject.SetActive(false);
         }
     }
@@ -58,7 +69,6 @@ public class EagleBladecaller : SkillModel
     {
         _isStarted = true;
         yield return new WaitForSeconds(5);
-        Debug.Log("wait");
         _isCalled = true;
     }
 
@@ -66,6 +76,7 @@ public class EagleBladecaller : SkillModel
     {
         if (!_isCalled)
         {
+            _isDelay = false;
             FlyingFeathers();
         }
         else
@@ -73,13 +84,13 @@ public class EagleBladecaller : SkillModel
             Bladecaller();
         }
 
-        if (!_isCurved)
+        if (!_isCurved && gameObject.activeSelf)
         {
             _isCurved = true;
             StartCoroutine(Curve());
         }
 
-        if (!_isStarted)
+        if (!_isStarted && gameObject.activeSelf)
         {
             StartCoroutine(WaitCalling());
         }
@@ -144,6 +155,6 @@ public class EagleBladecaller : SkillModel
         //pointC = GameObject.Find("Player").transform.position;
         pointC = Camera.main.ViewportToWorldPoint(new Vector3(0, Random.Range(0f, 1f), -Camera.main.transform.position.z));
         pointB = new Vector3(Random.Range(pointA.x, pointC.x), Camera.main.ViewportToWorldPoint(new Vector3(0, Random.Range(0f, 1f), 0)).y, 0);
-        CalculateCurvePoints(100);
+        CalculateCurvePoints(300);
     }
 }

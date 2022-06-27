@@ -16,7 +16,8 @@ public class CatGrooming : SkillModel
 
     public override void Cast()
     {
-        
+        gameObject.transform.SetParent(GameObject.Find("Cat").transform);
+        gameObject.transform.localPosition = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -24,7 +25,7 @@ public class CatGrooming : SkillModel
     {
         if (!_isStart)
         {
-            Cast();
+            StartCoroutine(WaitHealing());
         }
         
         if(_shield <= 0)
@@ -40,7 +41,10 @@ public class CatGrooming : SkillModel
         _isStart = true;
         yield return new WaitForSeconds(5);
         gameObject.GetComponentInParent<Cat>().Hp += 30;
+        GameObject.Find("Cat").GetComponent<CatSkill>().SkillRunnig = false;
+        GameObject.Find("Cat").GetComponent<CatSkill>().IsDelay = false;
         _isStart = false;
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

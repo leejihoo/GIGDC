@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CatHairBall : MonoBehaviour
+public class CatHairBall : SkillModel
 {
     int a;
     public CatHairBall()
@@ -12,19 +12,24 @@ public class CatHairBall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var particleSystem = gameObject.GetComponent<ParticleSystem>();
-
-
+   
     }
 
     // Update is called once per frame
     void Update()
-    {
-        var particleSystem = gameObject.GetComponent<ParticleSystem>();
-        ParticleSystem.Particle[] particle = new ParticleSystem.Particle[particleSystem.main.maxParticles];
+    {   
+    }
 
-        a = particleSystem.GetParticles(particle);
-        
-        
+    public override void Cast()
+    {
+        StartCoroutine(ContinueSkill());
+    }
+
+    IEnumerator ContinueSkill()
+    {
+        yield return new WaitForSeconds(5);
+        GameObject.Find("Cat").GetComponent<CatSkill>().SkillRunnig = false;
+        GameObject.Find("Cat").GetComponent<CatSkill>().IsDelay = false;
+        gameObject.SetActive(false);
     }
 }
