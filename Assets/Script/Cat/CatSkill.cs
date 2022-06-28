@@ -45,8 +45,8 @@ public class CatSkill : MonoBehaviour
     {
         IsDelay = true;
         yield return new WaitForSeconds(2);
-        var randomSkillIndex = Random.Range(0, 3);
-        //var randomSkillIndex = 1;
+        //var randomSkillIndex = Random.Range(0, 4);
+        var randomSkillIndex = 3;
         switch (randomSkillIndex)
         {
             case (int)skillType.ASSASSINATION:

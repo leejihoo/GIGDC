@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -54,7 +55,8 @@ public class Complete : MonoBehaviour
             
             if (PlayerPrefs.HasKey(_email.text))
             {
-                mode.SetRequestHeader("Authorization", "Bearer " + PlayerPrefs.GetString(_email.text));
+                var a = JObject.Parse(PlayerPrefs.GetString(_email.text));
+                mode.SetRequestHeader("Authorization", "Bearer " + a["token"]);
             }
 
             // 통신이 될 때까지 기다린다.

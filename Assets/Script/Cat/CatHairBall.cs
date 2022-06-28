@@ -22,6 +22,8 @@ public class CatHairBall : SkillModel
 
     public override void Cast()
     {
+        gameObject.transform.SetParent(GameObject.Find("Cat").transform);
+        gameObject.transform.localPosition = Vector3.zero;
         StartCoroutine(ContinueSkill());
     }
 

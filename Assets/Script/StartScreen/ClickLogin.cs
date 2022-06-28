@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using TMPro;
+using Newtonsoft.Json.Linq;
 
 public class ClickLogin : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class ClickLogin : MonoBehaviour
     {
 
         _loginForm = new LoginForm() { email = _email.text, password = _password.text };
+        EmailForToken.instance.KeyForToken = _email.text;
         var convertToJson = JsonUtility.ToJson(_loginForm);
         var convertToByte = new UTF8Encoding().GetBytes(convertToJson);
         // 해당 주소로 form 데이터를 전송
@@ -32,15 +34,15 @@ public class ClickLogin : MonoBehaviour
             mode.uploadHandler = new UploadHandlerRaw(convertToByte);
             mode.downloadHandler = new DownloadHandlerBuffer();
             mode.SetRequestHeader("Content-Type", "application/json");
+
             Debug.Log(mode.disposeDownloadHandlerOnDispose.ToString());
             Debug.Log(mode.disposeUploadHandlerOnDispose.ToString());
-
-
             Debug.Log(new UTF8Encoding().GetString(mode.uploadHandler.data));
+
             if (PlayerPrefs.HasKey(_email.text))
             {
-                Debug.Log("token있음");
-                mode.SetRequestHeader("Authorization","Bearer " + PlayerPrefs.GetString(_email.text));
+                var a = JObject.Parse(PlayerPrefs.GetString(_email.text));
+                mode.SetRequestHeader("Authorization","Bearer " + a["token"]);
             }
 
             // 통신이 될 때까지 기다린다.
