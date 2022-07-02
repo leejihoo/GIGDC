@@ -44,7 +44,6 @@ public class RewordManager : MonoBehaviour
             
             firstItem.transform.GetChild(0).GetComponent<Image>().sprite = ItemDatabase.instance.itemDB[1].ItemImage;
             firstItem.transform.SetParent(SlotGroup.transform);
-            itemInfoForJsons.itemInfoForJsons.Add(dogGum);
             itemInfoForJsons1.Add(JObject.FromObject(dogGum));
 
             switch (_stageId)
@@ -52,25 +51,21 @@ public class RewordManager : MonoBehaviour
                 case 1:
                     bossBooty = new ItemInfoForJson() { itemId = 2, addCount = 1};
                     secondItem.transform.GetChild(0).GetComponent<Image>().sprite = ItemDatabase.instance.itemDB[2].ItemImage;
-                    itemInfoForJsons.itemInfoForJsons.Add(bossBooty);
                     itemInfoForJsons1.Add(JObject.FromObject(bossBooty));
                     break;
                 case 2:
                     bossBooty = new ItemInfoForJson() { itemId = 3, addCount = 1 };
                     secondItem.transform.GetChild(0).GetComponent<Image>().sprite = ItemDatabase.instance.itemDB[3].ItemImage;
-                    itemInfoForJsons.itemInfoForJsons.Add(bossBooty);
                     itemInfoForJsons1.Add(JObject.FromObject(bossBooty));
                     break;
                 case 3:
                     bossBooty = new ItemInfoForJson() { itemId = 4, addCount = 1 };
                     secondItem.transform.GetChild(0).GetComponent<Image>().sprite = ItemDatabase.instance.itemDB[4].ItemImage;
-                    itemInfoForJsons.itemInfoForJsons.Add(bossBooty);
                     itemInfoForJsons1.Add(JObject.FromObject(bossBooty));
                     break;
                 case 4:
                     bossBooty = new ItemInfoForJson() { itemId = 5, addCount = 1 };
                     secondItem.transform.GetChild(0).GetComponent<Image>().sprite = ItemDatabase.instance.itemDB[5].ItemImage;
-                    itemInfoForJsons.itemInfoForJsons.Add(bossBooty);
                     itemInfoForJsons1.Add(JObject.FromObject(bossBooty));
                     break;
                 
@@ -90,7 +85,7 @@ public class RewordManager : MonoBehaviour
         //var convertToJson = JsonUtility.ToJson(itemInfoForJsons.itemInfoForJsons);
         var convertToByte = new UTF8Encoding().GetBytes(convertToJson);
         //var _email = EmailForToken.instance.KeyForToken;
-        string _email = "888123@gmail.com";
+        string _email = "999123@gmail.com";
 
         Debug.Log(convertToJson);
         // 해당 주소로 form 데이터를 전송
@@ -107,6 +102,7 @@ public class RewordManager : MonoBehaviour
 
             if (PlayerPrefs.HasKey(_email))
             {
+                Debug.Log(PlayerPrefs.GetString(_email));
                 var a = JObject.Parse(PlayerPrefs.GetString(_email));
                 Debug.Log("Bearer " + a["token"]);
                 mode.SetRequestHeader("Authorization", "Bearer " + a["token"]);
@@ -116,7 +112,7 @@ public class RewordManager : MonoBehaviour
             yield return mode.SendWebRequest();
             if (mode.error == null)
             {
-                
+                Debug.Log("데이터베이스에 획득 아이템 저장 성공");
             }
             else
             {
