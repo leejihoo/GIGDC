@@ -64,7 +64,12 @@ public class EagleSonicBoom : SkillModel
         
         if(finalDir.magnitude < 0.1f)
         {
-            _finalTargetPosition = true;
+            GameObject.Find("Eagle").GetComponent<EagleSkill>().SkillRunnig = false;
+            GameObject.Find("Eagle").GetComponent<EagleSkill>().IsDelay = false;
+            _firstTargetPosition = false;
+            _secondTargetPosition = false;
+            _thirdTargetPosition = false;
+            gameObject.SetActive(false);
         }
     }
 }

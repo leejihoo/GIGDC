@@ -26,6 +26,8 @@ public class EagleTornado : SkillModel
         _isStarted = false;
         yield return new WaitForSeconds(5);
         _isStarted = true;
+        GameObject.Find("Eagle").GetComponent<EagleSkill>().SkillRunnig = false;
+        GameObject.Find("Eagle").GetComponent<EagleSkill>().IsDelay = false;
         gameObject.SetActive(false);
         
     }

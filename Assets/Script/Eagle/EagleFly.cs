@@ -29,6 +29,10 @@ public class EagleFly : SkillModel
         _isStart = true;
         yield return new WaitForSeconds(3);
         this.transform.GetComponent<CircleCollider2D>().enabled = true;
+        GameObject.Find("Eagle").GetComponent<EagleSkill>().SkillRunnig = false;
+        GameObject.Find("Eagle").GetComponent<EagleSkill>().IsDelay = false;
+        _isStart = false;
+        gameObject.SetActive(false);
     }
 
 }

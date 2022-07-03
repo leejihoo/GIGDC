@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class CatAssassination : SkillModel
 {
@@ -79,7 +80,9 @@ public class CatAssassination : SkillModel
 
     public override void Cast()
     {
-        
+        gameObject.transform.SetParent(GameObject.Find("Cat").transform);
+        gameObject.transform.localPosition = Vector3.zero;
+        _isStart = false;
         GameObject.Find("Player").transform.GetChild(0).gameObject.SetActive(true);
     }
 
@@ -92,6 +95,11 @@ public class CatAssassination : SkillModel
             _playerPos = GameObject.Find("Player").transform.position;
             yield return new WaitForSeconds(3);
         }
+        GameObject.Find("Cat").GetComponent<CatSkill>().SkillRunnig = false;
+        GameObject.Find("Cat").GetComponent<CatSkill>().IsDelay = false;
+        GameObject.Find("Cat").transform.position = new Vector3(10, 0, 0);
+        GameObject.Find("GlobalLight").GetComponent<Light2D>().intensity = 1;
+        gameObject.SetActive(false);
     }
 
     public void TrackPlayer()
