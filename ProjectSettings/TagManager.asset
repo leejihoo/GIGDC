@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Eagle
   - Center
+  - Bullet
   layers:
   - Default
   - TransparentFX
