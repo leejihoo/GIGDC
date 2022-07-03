@@ -11,7 +11,8 @@ public class KumNoeHo : MonoBehaviour
     void Start()
     {
         lionPosCon = lionObject.GetComponent<LionPositionController>();
-        
+
+        //StartCoroutine(Attack_Co());
     }
 
     public void Attack() { //나중에 Start에 넣기

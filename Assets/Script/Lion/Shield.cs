@@ -5,7 +5,6 @@ using UnityEngine;
 public class Shield : MonoBehaviour
 {
     Animator anim;
-    Collider2D collider;
     int shildHp = 1000;
     bool shildActive = true;
 
@@ -13,7 +12,6 @@ public class Shield : MonoBehaviour
     void Start()
     {
         anim = this.GetComponent<Animator>();    
-        collider = this.GetComponent<Collider2D>();
         StartCoroutine(InitShield());
     }
 
@@ -29,7 +27,7 @@ public class Shield : MonoBehaviour
         anim.SetTrigger("Explosion");
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
+    private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Bullet") && shildActive) {
             shildHp -= 200;
             anim.SetTrigger("Attaked");

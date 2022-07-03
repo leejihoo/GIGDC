@@ -7,6 +7,7 @@ public class TestBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0.04f,0,0);       
+        //transform.position = this.transform.position + Vector3.right;   
+        transform.Translate(15f*Time.deltaTime,0,0);
     }
 }
