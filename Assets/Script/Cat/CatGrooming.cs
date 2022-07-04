@@ -43,6 +43,7 @@ public class CatGrooming : SkillModel
         gameObject.GetComponentInParent<Cat>().Hp += 30;
         GameObject.Find("Cat").GetComponent<CatSkill>().SkillRunnig = false;
         GameObject.Find("Cat").GetComponent<CatSkill>().IsDelay = false;
+
         _isStart = false;
         gameObject.SetActive(false);
     }

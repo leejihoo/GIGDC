@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using System;
+using UnityEngine.SceneManagement;
 
 public class StageRankInfo : MonoBehaviour
 {
@@ -14,11 +16,12 @@ public class StageRankInfo : MonoBehaviour
     private TMP_Text _mybestScore;
     [SerializeField]
     private GameObject _content;
+    
     // Start is called before the first frame update
     public void WrapCoroutine(string number)
-    {
-        
+    {   
         StartCoroutine(GetServerModeRoutine(number));
+        StageNumber.CurrentStage = Convert.ToInt32(number);
     }
 
     IEnumerator GetServerModeRoutine(string number)
@@ -75,5 +78,9 @@ public class StageRankInfo : MonoBehaviour
         var info = result["info"];
         _mybestScore.text = (string)info["bestScore"];
     }
+
+    public void ClickStartBtn()
+    {
+        SceneManager.LoadScene("BattleScene");
+    }
 }
-;

@@ -9,6 +9,7 @@ public class EagleSonicBoom : SkillModel
     private bool _secondTargetPosition;
     private bool _thirdTargetPosition;
     private bool _finalTargetPosition;
+    private Vector3 _firstPosition;
     public EagleSonicBoom()
     {
         Name = "SonicBoom";
@@ -17,6 +18,7 @@ public class EagleSonicBoom : SkillModel
 
     public override void Cast()
     {
+        _firstPosition = this.transform.parent.transform.position;
         //this.transform.parent.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.9f, 0.9f, -Camera.main.transform.position.z));
     }
     // Update is called once per frame
@@ -56,7 +58,7 @@ public class EagleSonicBoom : SkillModel
             _thirdTargetPosition = true;
         }
 
-        var finalDir = Camera.main.ViewportToWorldPoint(new Vector3(0.9f, 0.5f, -Camera.main.transform.position.z)) - GameObject.Find("Eagle").transform.position;
+        var finalDir = _firstPosition - GameObject.Find("Eagle").transform.position;
         if (finalDir.magnitude >= 0.1f && !_finalTargetPosition && _thirdTargetPosition)
         {
             this.transform.parent.transform.Translate(finalDir.normalized * Time.deltaTime * _speed);

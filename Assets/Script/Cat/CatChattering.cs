@@ -7,6 +7,8 @@ public class CatChattering : SkillModel
 {
     private float _speed;
     private bool _skillRunning;
+    private Vector3 _firstPosition;
+
     public CatChattering()
     {
         Name = "Chattering";    
@@ -18,13 +20,13 @@ public class CatChattering : SkillModel
 
         if (!_skillRunning)
         {
-            if (GameObject.Find("GlobalLight").GetComponent<Light2D>().intensity >= 0)
-            {
-                GameObject.Find("GlobalLight").GetComponent<Light2D>().intensity -= 0.002f;
-            }
-            else
-            {
-                GameObject.Find("Player").transform.GetChild(0).gameObject.SetActive(true);
+            //if (GameObject.Find("GlobalLight").GetComponent<Light2D>().intensity >= 0)
+            //{
+            //    GameObject.Find("GlobalLight").GetComponent<Light2D>().intensity -= 0.002f;
+            //}
+            //else
+            //{
+                //GameObject.Find("Player").transform.GetChild(0).gameObject.SetActive(true);
                 //GameObject.Find("Cat").transform.GetChild(2).gameObject.SetActive(true);
                 var _dir = GameObject.Find("Player").transform.position - GameObject.Find("Cat").transform.position;
 
@@ -32,7 +34,7 @@ public class CatChattering : SkillModel
                 {
                     this.transform.parent.transform.Translate(_dir.normalized * Time.deltaTime * _speed);
                 }
-            } 
+            //} 
         }
     }
 
@@ -49,6 +51,7 @@ public class CatChattering : SkillModel
         _speed = 5;
         gameObject.transform.SetParent(GameObject.Find("Cat").transform);
         gameObject.transform.localPosition = Vector3.zero;
+        _firstPosition = GameObject.Find("Cat").transform.position;
         _skillRunning = false;
         StartCoroutine(ContinueSkill());
         
@@ -60,8 +63,12 @@ public class CatChattering : SkillModel
         GameObject.Find("Cat").GetComponent<CatSkill>().SkillRunnig = false;
         GameObject.Find("Cat").GetComponent<CatSkill>().IsDelay = false;
         _skillRunning = true;
-        GameObject.Find("Cat").transform.position = new Vector3(10, 0, 0);
-        GameObject.Find("GlobalLight").GetComponent<Light2D>().intensity = 1;
+        GameObject.Find("Cat").transform.position = _firstPosition + new Vector3(20,0,0);
+        yield return new WaitForSeconds(1);
+
+        GameObject.Find("Cat").transform.position = _firstPosition;
+        
+        //GameObject.Find("GlobalLight").GetComponent<Light2D>().intensity = 1;
         gameObject.SetActive(false);
     }
 

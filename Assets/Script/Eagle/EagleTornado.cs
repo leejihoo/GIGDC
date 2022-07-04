@@ -34,7 +34,7 @@ public class EagleTornado : SkillModel
 
     public override void Cast()
     {
-        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, -Camera.main.transform.position.z));        
+        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(1f, 0.5f, -Camera.main.transform.position.z));        
     }
 
     public void Update()
