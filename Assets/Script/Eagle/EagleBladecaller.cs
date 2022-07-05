@@ -28,22 +28,12 @@ public class EagleBladecaller : SkillModel
 
     public void FlyingFeathers()
     {
-        //var result = Vector3.Slerp(transform.position, GameObject.Find("Player").transform.position, 0.01f) ;
-        //transform.position = result;
-        //transform.Translate(new Vector3(-1, 0, 0) * Time.deltaTime * _speed);
 
-        //Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-
-        //if (pos.x < 0f) pos.x = 0f;
-        //if (pos.x > 1f) pos.x = 1f;
-        //if (pos.y < 0f) pos.y = 0f;
-        //if (pos.y > 1f) pos.y = 1f;
-        //transform.position = Camera.main.ViewportToWorldPoint(pos);
     }
 
     public void Bladecaller()
     {
-        var target = GameObject.FindGameObjectWithTag("Eagle");
+        var target = GameObject.Find("ControlPoint");
         Vector2 dirForwardBoss = target.transform.position - this.transform.position;
         
         transform.Translate(dirForwardBoss.normalized * Time.deltaTime * _speed);
@@ -77,7 +67,6 @@ public class EagleBladecaller : SkillModel
         if (!_isCalled)
         {
             _isDelay = false;
-            FlyingFeathers();
         }
         else
         {
@@ -95,16 +84,6 @@ public class EagleBladecaller : SkillModel
             StartCoroutine(WaitCalling());
         }
     }
-
-    //private void Start()
-    //{
-    //    pointA = GameObject.Find("Eagle").transform.position;
-    //    //pointC = GameObject.Find("Player").transform.position;
-    //    pointC = Camera.main.ViewportToWorldPoint(new Vector3(0, Random.Range(0f, 1f), 0));
-        
-    //    pointB = new Vector3(Random.Range(pointA.x, pointC.x), Camera.main.ViewportToWorldPoint(new Vector3(0, Random.Range(0f, 1f), 0)).y, 0);
-    //    CalculateCurvePoints(75);
-    //}
         
     public Vector3 pointA;
     public Vector3 pointB;
@@ -151,10 +130,10 @@ public class EagleBladecaller : SkillModel
 
     public override void Cast()
     {
-        pointA = GameObject.Find("Eagle").transform.position;
+        pointA = GameObject.Find("ControlPoint").transform.position;
         //pointC = GameObject.Find("Player").transform.position;
         pointC = Camera.main.ViewportToWorldPoint(new Vector3(0, Random.Range(0f, 1f), -Camera.main.transform.position.z));
         pointB = new Vector3(Random.Range(pointA.x, pointC.x), Camera.main.ViewportToWorldPoint(new Vector3(0, Random.Range(0f, 1f), 0)).y, 0);
-        CalculateCurvePoints(300);
+        CalculateCurvePoints(200);
     }
 }

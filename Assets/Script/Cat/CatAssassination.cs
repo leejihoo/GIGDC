@@ -7,12 +7,8 @@ public class CatAssassination : SkillModel
 {
     private float _speed;
     private Vector3 _playerPos;
-
+    private Vector3 _firstPosition;
     private bool _isStart;
-    private bool _firstTargetPosition;
-    private bool _secondTargetPosition;
-    private bool _thirdTargetPosition;
-    private bool _finalTargetPosition;
 
     private Vector3 _dir;
     //private Vector3 _secondDir;
@@ -39,19 +35,19 @@ public class CatAssassination : SkillModel
             StartCoroutine(AttackOrder());
         }
 
-        if (GameObject.Find("GlobalLight").GetComponent<UnityEngine.Rendering.Universal.Light2D>().intensity >= 0)
-        {
-            GameObject.Find("GlobalLight").GetComponent<UnityEngine.Rendering.Universal.Light2D>().intensity -= 0.002f;
-        }
-        else
-        {
+        //if (GameObject.Find("GlobalLight").GetComponent<UnityEngine.Rendering.Universal.Light2D>().intensity >= 0)
+        //{
+        //    GameObject.Find("GlobalLight").GetComponent<UnityEngine.Rendering.Universal.Light2D>().intensity -= 0.002f;
+        //}
+        //else
+        //{
             _dir = _playerPos - GameObject.Find("Cat").transform.position;
 
             if (_dir.magnitude >= 0.1f)
             {
                 this.transform.parent.transform.Translate(_dir.normalized * Time.deltaTime * _speed);
             }
-        }
+        //}
         
 
         //var secondDir = _playerPos - GameObject.Find("Cat").transform.position;
@@ -80,10 +76,12 @@ public class CatAssassination : SkillModel
 
     public override void Cast()
     {
+        
         gameObject.transform.SetParent(GameObject.Find("Cat").transform);
         gameObject.transform.localPosition = Vector3.zero;
+        _firstPosition = GameObject.Find("Cat").transform.position;
         _isStart = false;
-        GameObject.Find("Player").transform.GetChild(0).gameObject.SetActive(true);
+        //GameObject.Find("Player").transform.GetChild(0).gameObject.SetActive(true);
     }
 
     IEnumerator AttackOrder()
@@ -97,8 +95,10 @@ public class CatAssassination : SkillModel
         }
         GameObject.Find("Cat").GetComponent<CatSkill>().SkillRunnig = false;
         GameObject.Find("Cat").GetComponent<CatSkill>().IsDelay = false;
-        GameObject.Find("Cat").transform.position = new Vector3(10, 0, 0);
-        GameObject.Find("GlobalLight").GetComponent<Light2D>().intensity = 1;
+        GameObject.Find("Cat").transform.position = _firstPosition + new Vector3(20, 0, 0);
+        yield return new WaitForSeconds(1);
+        GameObject.Find("Cat").transform.position = _firstPosition;
+        //GameObject.Find("GlobalLight").GetComponent<Light2D>().intensity = 1;
         gameObject.SetActive(false);
     }
 

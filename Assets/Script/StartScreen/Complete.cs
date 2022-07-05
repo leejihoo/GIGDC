@@ -62,6 +62,7 @@ public class Complete : MonoBehaviour
             else
             {
                 Debug.Log("GetServerMode: " + mode.error);
+                
             }
         }
 
