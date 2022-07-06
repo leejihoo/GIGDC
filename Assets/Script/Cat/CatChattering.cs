@@ -42,13 +42,13 @@ public class CatChattering : SkillModel
     {
         if (collision.CompareTag("Player"))
         {
-            _speed = 20;
+            _speed = 10;
         }
     }
 
     public override void Cast()
     {
-        _speed = 5;
+        _speed = 3;
         //gameObject.transform.SetParent(GameObject.Find("Cat").transform);
         //gameObject.transform.localPosition = Vector3.zero;
         _firstPosition = GameObject.Find("Cat").transform.position;

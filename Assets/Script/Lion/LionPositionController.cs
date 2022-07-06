@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LionPositionController : MonoBehaviour
+public class LionPositionController : Boss
 {
     public Transform hidePoint;
     public Transform defaultPoint;

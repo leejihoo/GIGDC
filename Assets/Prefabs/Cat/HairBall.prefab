@@ -3736,7 +3736,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.2
+      scalar: 1.05
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3844,19 +3844,19 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 128
+      m_Bits: 384
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 2
-    inside: 1
+    inside: 0
     outside: 0
-    enter: 0
+    enter: 2
     exit: 0
     colliderQueryMode: 0
     radiusScale: 1
@@ -4883,6 +4883,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f4dc136d6561943ab8b3c5581c3bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lionPosCon: {fileID: 0}
+  shark: {fileID: 0}
+  bossController_Shark: {fileID: 0}
+  defaultPoint: {fileID: 0}
+  hidePoint: {fileID: 0}
+  returnPoint: {fileID: 0}
+  bossController: {fileID: 0}
+  dummy: {fileID: 0}
   Name: 
   IsCanParrying: 0
   Damage: 0

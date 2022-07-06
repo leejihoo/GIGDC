@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8998065116632520674}
   - component: {fileID: 8998065116632520685}
-  - component: {fileID: 8998065116632520684}
   - component: {fileID: 8998065116632520687}
   - component: {fileID: -4115601755567201131}
   - component: {fileID: 1623768437}
@@ -88,22 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &8998065116632520684
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8998065116632520686}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &8998065116632520687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +99,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a04b3a47fabae7469a3f713447d0b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lionPosCon: {fileID: 0}
+  shark: {fileID: 0}
+  bossController_Shark: {fileID: 0}
+  defaultPoint: {fileID: 0}
+  hidePoint: {fileID: 0}
+  returnPoint: {fileID: 0}
+  bossController: {fileID: 0}
+  dummy: {fileID: 0}
   Name: Fly
   IsCanParrying: 0
   Damage: 2
@@ -223,7 +214,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8998065116632520686}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

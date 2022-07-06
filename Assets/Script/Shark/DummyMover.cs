@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DummyMover : MonoBehaviour
 {
@@ -43,7 +44,9 @@ public class DummyMover : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag.Contains("Lion") || other.tag.Contains("Cat") || other.tag.Contains("Shark") || other.tag.Contains("Eagle")) {
+            SceneManager.LoadScene("GameClearScene");
             Debug.Log("GameOVer!!!!");
         }
     }
+
 }

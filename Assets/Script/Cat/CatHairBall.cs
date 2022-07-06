@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class CatHairBall : SkillModel
 {
 
@@ -38,5 +38,15 @@ public class CatHairBall : SkillModel
         GameObject.Find("Cat").GetComponent<Animator>().SetBool("IsHairBallOn", false);
         GameObject.Find("Cat").GetComponent<AudioSource>().Stop();
         gameObject.SetActive(false);
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if(other.name == "Player")
+        {
+            SceneManager.LoadScene("GameClearScene");
+            Debug.Log("게임종료");
+        }
+        
     }
 }

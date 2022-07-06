@@ -57,7 +57,7 @@ public class CatGrooming : SkillModel
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Bullet"))
         {
             this.GetComponent<Animator>().SetTrigger("IsDamaged");
             // 유저의 총알에 맞았을 때

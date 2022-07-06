@@ -28,6 +28,7 @@ public class EagleFly : SkillModel
     {
         _isStart = true;
         yield return new WaitForSeconds(3);
+        gameObject.GetComponent<CircleCollider2D>().enabled = true;
         gameObject.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(1);
         this.transform.GetComponent<CircleCollider2D>().enabled = true;
@@ -36,6 +37,7 @@ public class EagleFly : SkillModel
         GameObject.Find("Eagle").GetComponent<Animator>().SetBool("IsFlyOn", false);
         _isStart = false;
         GameObject.Find("Eagle").GetComponent<AudioSource>().Stop();
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
         gameObject.SetActive(false);
     }
 

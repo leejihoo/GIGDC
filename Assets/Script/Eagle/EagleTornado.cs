@@ -16,7 +16,7 @@ public class EagleTornado : SkillModel
         Damage = 1;
         HoldingTime = 5;
         _isStarted = true;
-        _power = 10f;
+        _power = 5f;
 
     }
 
