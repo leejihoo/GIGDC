@@ -23,7 +23,7 @@ public class BossController_Shark : MonoBehaviour
         SkillModel newSkill = GameObject.Instantiate(skills[Random.Range(0,4)]);
         newSkill.shark = boss;
         newSkill.bossController_Shark = this;
-        newSkill.dummy = GameObject.Find("dummy").gameObject;
+        newSkill.dummy = GameObject.Find("Player").gameObject;
         newSkill.defaultPoint = GameObject.Find("defaultPoint").transform;
         newSkill.hidePoint = GameObject.Find("hidePoint").transform;
         newSkill.returnPoint = GameObject.Find("returnPoint").transform;
