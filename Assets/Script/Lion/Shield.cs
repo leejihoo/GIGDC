@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shield : MonoBehaviour
+public class Shield : SkillModel
 {
     Animator anim;
     int shildHp = 1000;
@@ -25,6 +25,7 @@ public class Shield : MonoBehaviour
         yield return new WaitForSeconds(10f);
         Debug.Log("Explosion...!");
         anim.SetTrigger("Explosion");
+        bossController.EndSkillPlaying();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -36,6 +37,7 @@ public class Shield : MonoBehaviour
                 StopCoroutine(InitShield());
                 shildActive = false;
                 anim.SetTrigger("Broke");
+                bossController.EndSkillPlaying();
             }
         }
     }

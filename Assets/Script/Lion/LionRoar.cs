@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LionRoar : MonoBehaviour
+public class LionRoar : SkillModel
 {
-    public LionPositionController lionPosCon; // 나중엔 StageGeneralManager가 LionRoar Instantiate하면서 LionPosCon지정해주기.
+    //public LionPositionController lionPosCon; // 나중엔 StageGeneralManager가 LionRoar Instantiate하면서 LionPosCon지정해주기.
     public GameObject roar;
 
     private void Start() {
@@ -24,5 +24,7 @@ public class LionRoar : MonoBehaviour
         yield return lionPosCon.HideRight_Co();
 
         yield return lionPosCon.EnterLeft_Co();
+
+        bossController.EndSkillPlaying();
     }
 }

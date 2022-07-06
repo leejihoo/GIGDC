@@ -2,25 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shark_Bite : MonoBehaviour
+public class Shark_Bite : SkillModel
 {
-    public Shark shark;
-    public Transform defaultPoint, hidePoint, returnPoint;
     public GameObject targetBox;
-    Transform character;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Hide());
-        character = GameObject.Find("dummy").transform;
     }
 
     public IEnumerator Hide() {
         
-        while((shark.transform.position.x - hidePoint.transform.position.x) < -1.0f) { //나중에 선형보간
+        while((shark.transform.position.x - hidePoint.position.x) < -0.1f) { //나중에 선형보간
             Vector3 temp = Vector3.Normalize(hidePoint.position - shark.transform.position);
-            temp *= 0.02f;
+            temp *= 0.1f;
             shark.transform.Translate(temp);
             yield return new WaitForSeconds(Time.deltaTime);
         }
@@ -34,7 +30,7 @@ public class Shark_Bite : MonoBehaviour
 
         targetBox.SetActive(true);
         while(timer < 1.0f){
-            targetBox.transform.position = character.position;
+            targetBox.transform.position = dummy.transform.position;
             timer += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
@@ -43,10 +39,11 @@ public class Shark_Bite : MonoBehaviour
 
     public IEnumerator Bite() {
         Vector3 initialPoint = shark.transform.position;
+        Vector3 destPoint = targetBox.transform.position + Vector3.left*4 + Vector3.down*2;
         float time = 0.0f;
         //물으러가기
         while(time < 1.5f) {
-            shark.transform.position = Vector3.Lerp(shark.transform.position, targetBox.transform.position, Time.deltaTime*10);
+            shark.transform.position = Vector3.Lerp(shark.transform.position, destPoint, Time.deltaTime*10);
             time += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
@@ -70,6 +67,7 @@ public class Shark_Bite : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
+        bossController_Shark.EndSkillPlaying();
         Debug.Log("Skill <Bite> End");
     }
 

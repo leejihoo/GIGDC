@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Test : MonoBehaviour
+public class Test : SkillModel
 {
     public GameObject[] waves;
-    public GameObject shark;
 
-    public void Click() {
+    void Start() {
         StartCoroutine(ClickAnim());
     }
 
@@ -21,5 +20,6 @@ public class Test : MonoBehaviour
 
             yield return wait;
         }
+        bossController_Shark.EndSkillPlaying();
     }
 }

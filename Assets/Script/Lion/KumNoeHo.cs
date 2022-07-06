@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KumNoeHo : MonoBehaviour
+public class KumNoeHo : SkillModel
 {
     public GameObject lionObject;
-    private LionPositionController lionPosCon;
+    //private LionPositionController lionPosCon;
     public GameObject skillEffect;
 
     void Start()
     {
-        lionPosCon = lionObject.GetComponent<LionPositionController>();
-
-        //StartCoroutine(Attack_Co());
+        StartCoroutine(Attack_Co());
     }
 
     public void Attack() { //나중에 Start에 넣기
@@ -33,6 +31,8 @@ public class KumNoeHo : MonoBehaviour
         yield return new WaitForSeconds(3.0f);
 
         yield return lionPosCon.EnterLeft_Co();
+
+        bossController.EndSkillPlaying();
         
     }
 
