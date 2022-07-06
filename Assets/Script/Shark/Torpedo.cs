@@ -32,7 +32,7 @@ public class Torpedo : MonoBehaviour
 
         while(value < 1.0f) {
             this.transform.position = BezierCurves.Bezier(vecList, value);
-            value += Time.deltaTime*2f;
+            value += Time.deltaTime*1f;
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
