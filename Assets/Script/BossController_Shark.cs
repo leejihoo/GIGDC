@@ -13,7 +13,6 @@ public class BossController_Shark : MonoBehaviour
 
         for(int i = 0; i < 4; i++) {
             skills[i] = (Resources.Load("Prefab/Boss/SharkSkill_"+i) as GameObject).GetComponent<SkillModel>();
-            Debug.Log(i);
         }
 
         StartCoroutine(SkillCycle());
@@ -31,18 +30,17 @@ public class BossController_Shark : MonoBehaviour
     }
 
     IEnumerator SkillCycle() {
+        yield return new WaitForSeconds(3.0f);
+
         Repeat :
-        Debug.Log("Skill Play Start");
         SkillRun();
         while(isSkillRunning) {
-            Debug.Log("Not Yet");
             yield return new WaitForSeconds(4.0f);
         }
         goto Repeat;
     }
 
     public void EndSkillPlaying() {
-        Debug.Log("Stop");
         isSkillRunning = false;
     }
 }
