@@ -53,7 +53,7 @@ public class LionPositionController : Boss
     public IEnumerator MoveLeftLittle() {
         Vector3 currentPos = Camera.main.WorldToViewportPoint(this.transform.position);
         Debug.Log(currentPos);
-        Vector3 left = Camera.main.ViewportToWorldPoint(currentPos - Vector3.one*0.1f);
+        Vector3 left = Camera.main.ViewportToWorldPoint(currentPos - Vector3.one*0.08f);
         Debug.Log(left);
 
         while(left.x - this.transform.position.x < -0.001f) {

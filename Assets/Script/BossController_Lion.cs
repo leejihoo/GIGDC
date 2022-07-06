@@ -14,7 +14,6 @@ public class BossController_Lion : MonoBehaviour
 
         for(int i = 0; i < 4; i++) {
             skills[i] = (Resources.Load("Prefab/Boss/LionSkill_"+i) as GameObject).GetComponent<SkillModel>();
-            Debug.Log(i);
         }
 
         StartCoroutine(SkillCycle());
@@ -28,11 +27,11 @@ public class BossController_Lion : MonoBehaviour
     }
 
     IEnumerator SkillCycle() {
+        yield return new WaitForSeconds(3.0f);
+
         Repeat :
-        Debug.Log("Skill Play Start");
         SkillRun();
         while(isSkillRunning) {
-            Debug.Log("Not Yet");
             yield return new WaitForSeconds(1.0f);
         }
         goto Repeat;
