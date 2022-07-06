@@ -5,18 +5,24 @@ using UnityEngine;
 public class BossDamaged : MonoBehaviour
 {
     public GameObject bossDamagedSound;
+
+    Animator anim;
+    private void Start() {
+        anim = GetComponent<Animator>();
+    }
+
     public void Damaged()
     {
-
+        anim.SetTrigger("hit");
         StageClearInfo stageClearInfo = new StageClearInfo() { stageId = StageNumber.CurrentStage, isClear = true, bestScore = 0 };
-        if (this.GetComponent<Boss>().Hp <= 0)
+        if(this.GetComponent<Boss>().Hp <= 0)
         {
-            Debug.Log("º¸½º»ç¸Á");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
             GameObject.Find("BattleSceneManager").GetComponent<BattleSceneManager>().Wrap(stageClearInfo);
         }
         bossDamagedSound.GetComponent<AudioSource>().Play();
         this.GetComponent<Boss>().Hp -= 1;
-        Debug.Log("º¸½ºÃ¼·Â°¨¼Ò: " + this.GetComponent<Boss>().Hp);
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½Â°ï¿½ï¿½ï¿½: " + this.GetComponent<Boss>().Hp);
     }
 
     public void OnTriggerEnter2D(Collider2D other)

@@ -28,6 +28,7 @@ public class BattleSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
         this.GetComponent<AudioSource>().clip = _backgroundMusic[StageNumber.CurrentStage-1];
         this.GetComponent<AudioSource>().Play();
         _background.GetComponent<SpriteRenderer>().sprite = _backgrounds[StageNumber.CurrentStage-1];
@@ -41,11 +42,6 @@ public class BattleSceneManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void Wrap(StageClearInfo stageClearInfo)
     {

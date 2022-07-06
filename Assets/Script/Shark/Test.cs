@@ -12,14 +12,15 @@ public class Test : SkillModel
     }
 
     IEnumerator ClickAnim() {
-        var wait = new WaitForSeconds(0.3f);
+        var wait = new WaitForSeconds(1f);
         for(int i = 0; i < 5; i++) {
             GameObject wave = GameObject.Instantiate(waves[i%2]) as GameObject;
             wave.transform.rotation = shark.transform.rotation;
-            wave.transform.position = shark.transform.position;
+            wave.transform.position = new Vector3(3,0,0);
 
             yield return wait;
         }
+        yield return new WaitForSeconds(5.0f);
         bossController_Shark.EndSkillPlaying();
     }
 }

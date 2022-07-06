@@ -25,21 +25,27 @@ public class Shield : SkillModel
         yield return new WaitForSeconds(10f);
         Debug.Log("Explosion...!");
         anim.SetTrigger("Explosion");
+        yield return new WaitForSeconds(5.0f);
         bossController.EndSkillPlaying();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Bullet") && shildActive) {
-            shildHp -= 200;
+            shildHp -= 100;
             anim.SetTrigger("Attaked");
             Destroy(other.gameObject);
             if(shildHp <= 0) {
                 StopCoroutine(InitShield());
                 shildActive = false;
                 anim.SetTrigger("Broke");
+                StartCoroutine(Wait());
                 bossController.EndSkillPlaying();
             }
         }
+    }
+
+    IEnumerator Wait() {
+        yield return new WaitForSeconds(6.0f);
     }
 
 
