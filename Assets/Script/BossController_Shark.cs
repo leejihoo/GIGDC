@@ -36,7 +36,7 @@ public class BossController_Shark : MonoBehaviour
         SkillRun();
         while(isSkillRunning) {
             Debug.Log("Not Yet");
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(4.0f);
         }
         goto Repeat;
     }

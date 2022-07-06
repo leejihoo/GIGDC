@@ -47,8 +47,8 @@ public class CatSkill : MonoBehaviour
     {
         IsDelay = true;
         yield return new WaitForSeconds(2);
-        //var randomSkillIndex = Random.Range(0, 4);
-        var randomSkillIndex = 2;
+        var randomSkillIndex = Random.Range(0, 4);
+        //var randomSkillIndex = 2;
         this.GetComponent<AudioSource>().clip = _skillMusics[randomSkillIndex];
         this.GetComponent<AudioSource>().Play();
         switch (randomSkillIndex)

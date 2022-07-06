@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Wave : MonoBehaviour
 {
-    float speed = -0.03f;
+    float speed = -3f;
     void Update()
     {
-        this.transform.Translate(speed,0,0);
+        this.transform.Translate(speed * Time.deltaTime,0,0);
     }
 
 }
