@@ -38,13 +38,14 @@ public class DummyMover : MonoBehaviour
             GameObject newBullet = GameObject.Instantiate(bullet);
             newBullet.transform.position = launchPoint.position;
             newBullet.transform.Translate(0,0,1);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.35f);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag.Contains("Lion") || other.tag.Contains("Cat") || other.tag.Contains("Shark") || other.tag.Contains("Eagle")) {
-            SceneManager.LoadScene("GameClearScene");
+        StageClearInfo stageClearInfo = new StageClearInfo() { stageId = StageNumber.CurrentStage, isClear = false, bestScore = 0 };
+        if (other.tag.Contains("Lion") || other.tag.Contains("Cat") || other.tag.Contains("Shark") || other.tag.Contains("Eagle")) {
+            GameObject.Find("BattleSceneManager").GetComponent<BattleSceneManager>().Wrap(stageClearInfo);
             Debug.Log("GameOVer!!!!");
         }
     }

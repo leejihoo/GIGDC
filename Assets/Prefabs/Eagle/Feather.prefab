@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8719871833004603724}
   - component: {fileID: 8719871833004603721}
   - component: {fileID: 739374640}
+  - component: {fileID: 1946935975}
   m_Layer: 0
   m_Name: Feather
   m_TagString: Eagle
@@ -99,6 +100,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47bb48fb97e96854cb2ffc75c68df341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lionPosCon: {fileID: 0}
+  shark: {fileID: 0}
+  bossController_Shark: {fileID: 0}
+  defaultPoint: {fileID: 0}
+  hidePoint: {fileID: 0}
+  returnPoint: {fileID: 0}
+  bossController: {fileID: 0}
+  dummy: {fileID: 0}
   Name: Bladecaller
   IsCanParrying: 1
   Damage: 1
@@ -231,53 +240,26 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 1.1999999, y: -0.275}
-      - {x: 1.4, y: -0.255}
-      - {x: 1.56, y: -0.225}
-      - {x: 1.8399999, y: -0.145}
       - {x: 1.9699999, y: -0.085}
-      - {x: 2, y: -0.024999999}
-      - {x: 2, y: 0.055}
-      - {x: 1.9699999, y: 0.13499999}
       - {x: 1.91, y: 0.205}
-      - {x: 1.76, y: 0.205}
-      - {x: 1.4699999, y: 0.035}
-      - {x: 1.15, y: -0.035}
       - {x: 0.94, y: -0.044999998}
-      - {x: 0.9, y: 0.175}
       - {x: 0.78999996, y: 0.305}
-      - {x: 0.76, y: 0.295}
-      - {x: 0.68, y: 0.345}
-      - {x: 0.58, y: 0.355}
-      - {x: 0.56, y: 0.315}
-      - {x: 0.56, y: 0.205}
-      - {x: 0.47, y: 0.295}
-      - {x: 0.41, y: 0.345}
-      - {x: 0.22999999, y: 0.445}
       - {x: 0.03, y: 0.49499997}
-      - {x: -0.45, y: 0.49499997}
-      - {x: -0.65999997, y: 0.45499998}
       - {x: -0.88, y: 0.405}
-      - {x: -1.13, y: 0.305}
-      - {x: -1.54, y: 0.085}
-      - {x: -1.6899999, y: 0.024999999}
-      - {x: -1.99, y: -0.065}
-      - {x: -2, y: -0.095}
       - {x: -2, y: -0.155}
-      - {x: -1.9799999, y: -0.16499999}
-      - {x: -1.8299999, y: -0.24499999}
-      - {x: -1.36, y: -0.36499998}
-      - {x: -0.90999997, y: -0.42499998}
-      - {x: -0.68, y: -0.45499998}
-      - {x: -0.56, y: -0.465}
       - {x: -0.34, y: -0.475}
-      - {x: -0.01, y: -0.475}
-      - {x: 0.29999998, y: -0.42499998}
-      - {x: 0.42, y: -0.39499998}
-      - {x: 0.41, y: -0.445}
-      - {x: 0.45, y: -0.48499998}
-      - {x: 0.53, y: -0.48499998}
-      - {x: 0.61, y: -0.49499997}
       - {x: 0.74, y: -0.49499997}
-      - {x: 0.82, y: -0.39499998}
-      - {x: 0.90999997, y: -0.255}
       - {x: 0.97999996, y: -0.265}
+--- !u!114 &1946935975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8719871833004603725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6876803ba35184bf9b6a393e33a2f264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tolerance: 0.18

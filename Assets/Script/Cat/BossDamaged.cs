@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class BossDamaged : MonoBehaviour
 {
-
+    public GameObject bossDamagedSound;
     public void Damaged()
     {
-        if(this.GetComponent<Boss>().Hp <= 0)
+
+        StageClearInfo stageClearInfo = new StageClearInfo() { stageId = StageNumber.CurrentStage, isClear = true, bestScore = 0 };
+        if (this.GetComponent<Boss>().Hp <= 0)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("GameClearScene");
+            Debug.Log("보스사망");
+            GameObject.Find("BattleSceneManager").GetComponent<BattleSceneManager>().Wrap(stageClearInfo);
         }
+        bossDamagedSound.GetComponent<AudioSource>().Play();
         this.GetComponent<Boss>().Hp -= 1;
         Debug.Log("보스체력감소: " + this.GetComponent<Boss>().Hp);
     }

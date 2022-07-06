@@ -42,11 +42,11 @@ public class CatHairBall : SkillModel
 
     private void OnParticleCollision(GameObject other)
     {
-        if(other.name == "Player")
+        StageClearInfo stageClearInfo = new StageClearInfo() { stageId = StageNumber.CurrentStage, isClear = false, bestScore = 0 };
+        if (other.name == "Player")
         {
-            SceneManager.LoadScene("GameClearScene");
+            GameObject.Find("BattleSceneManager").GetComponent<BattleSceneManager>().Wrap(stageClearInfo);
             Debug.Log("게임종료");
         }
-        
     }
 }

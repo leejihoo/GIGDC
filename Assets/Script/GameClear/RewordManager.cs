@@ -9,33 +9,37 @@ using Newtonsoft.Json.Linq;
 public class RewordManager : MonoBehaviour
 {
     private int _stageId;
-    private bool _IsCleared;
+    public static bool _IsCleared;
     public ItemInfoForJsons itemInfoForJsons;
     public GameObject RewordSlot;
     public GameObject SlotGroup;
     public JArray itemInfoForJsons1;
+    public GameObject CharaterImage;
+    public Sprite clear;
+    public Sprite fail;
+    public List<AudioClip> audioClips;
     //public List<ItemInfoForJson> itemInfoForJsons = new List<ItemInfoForJson>();
 
     public RewordManager()
     {
+        audioClips = new List<AudioClip>();
         // itemInfoForJsons = new ItemInfoForJsons();
         itemInfoForJsons1 = new JArray();
     }
     public void Start()
     {
-        // test º¯¼ö
-        _IsCleared = true;
-        _stageId = 1;
-
+        _IsCleared = StageNumber.IsClear;
+        _stageId = StageNumber.CurrentStage;
         RewordSetting();
-        StartCoroutine(GetServerModeRoutine());
+        
     }
 
     public void RewordSetting()
     {
         if (_IsCleared)
         {
-
+            gameObject.GetComponent<AudioSource>().clip = audioClips[1];
+            CharaterImage.GetComponent<Image>().sprite = clear;
             ItemInfoForJson dogGum = new ItemInfoForJson() { itemId = 1, addCount = _stageId };
             ItemInfoForJson bossBooty;
 
@@ -71,12 +75,16 @@ public class RewordManager : MonoBehaviour
                 
             }
 
-            secondItem.transform.SetParent(SlotGroup.transform);         
+            secondItem.transform.SetParent(SlotGroup.transform);
+            StartCoroutine(GetServerModeRoutine());
         }
         else
         {
+            CharaterImage.GetComponent<Image>().sprite = fail;
+            gameObject.GetComponent<AudioSource>().clip = audioClips[0];
 
         }
+        gameObject.GetComponent<AudioSource>().Play();
     }
 
     IEnumerator GetServerModeRoutine()
