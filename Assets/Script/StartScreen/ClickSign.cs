@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ClickSign : MonoBehaviour
 {
+    public GameObject panel;
     public void ClickSignBtn()
     {
-        GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(true);
+        panel.gameObject.SetActive(true);
     }
 }

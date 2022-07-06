@@ -444,7 +444,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Reword
+  m_text: Reward
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -983,6 +983,7 @@ MonoBehaviour:
   audioClips:
   - {fileID: 8300000, guid: adcbbbae313cb40978e30faf82938987, type: 3}
   - {fileID: 8300000, guid: 524fb3698f9864ea4a953e57aefc11ad, type: 3}
+  clearText: {fileID: 1208923253}
 --- !u!82 &938261688
 AudioSource:
   m_ObjectHideFlags: 0

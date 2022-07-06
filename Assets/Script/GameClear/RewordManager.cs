@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using Newtonsoft.Json.Linq;
+using TMPro;
 public class RewordManager : MonoBehaviour
 {
     private int _stageId;
@@ -18,6 +19,7 @@ public class RewordManager : MonoBehaviour
     public Sprite clear;
     public Sprite fail;
     public List<AudioClip> audioClips;
+    public GameObject clearText;
     //public List<ItemInfoForJson> itemInfoForJsons = new List<ItemInfoForJson>();
 
     public RewordManager()
@@ -38,6 +40,7 @@ public class RewordManager : MonoBehaviour
     {
         if (_IsCleared)
         {
+            clearText.GetComponent<TextMeshProUGUI>().text = "Game Clear";
             gameObject.GetComponent<AudioSource>().clip = audioClips[1];
             CharaterImage.GetComponent<Image>().sprite = clear;
             ItemInfoForJson dogGum = new ItemInfoForJson() { itemId = 1, addCount = _stageId };
@@ -80,6 +83,7 @@ public class RewordManager : MonoBehaviour
         }
         else
         {
+            clearText.GetComponent<TextMeshProUGUI>().text = "Game Over";
             CharaterImage.GetComponent<Image>().sprite = fail;
             gameObject.GetComponent<AudioSource>().clip = audioClips[0];
 
