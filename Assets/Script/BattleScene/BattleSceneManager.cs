@@ -54,8 +54,8 @@ public class BattleSceneManager : MonoBehaviour
         //var convertToJson = stageClearInfo.ToString();
         var convertToJson = JsonUtility.ToJson(stageClearInfo);
         var convertToByte = new UTF8Encoding().GetBytes(convertToJson);
-        //var _email = EmailForToken.instance.KeyForToken;
-        string _email = "999123@gmail.com";
+        var _email = EmailForToken.instance.KeyForToken;
+        //string _email = "999123@gmail.com";
 
         Debug.Log(convertToJson);
         // 해당 주소로 form 데이터를 전송

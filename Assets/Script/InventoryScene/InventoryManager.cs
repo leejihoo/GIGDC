@@ -29,8 +29,8 @@ public class InventoryManager : MonoBehaviour
 
     IEnumerator GetServerModeRoutine()
     {
-        //var _email = EmailForToken.instance.KeyForToken;
-        string _email = "999123@gmail.com";
+        var _email = EmailForToken.instance.KeyForToken;
+        //string _email = "999123@gmail.com";
 
         // 해당 주소로 form 데이터를 전송
         using (UnityWebRequest mode = UnityWebRequest.Get("http://13.125.177.161:8080/api/v1/items"))
