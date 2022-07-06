@@ -5,7 +5,7 @@ using UnityEngine;
 public class StageNumber : MonoBehaviour
 {
     static public StageNumber instance;
-    static public int CurrentStage = 3;
+    static public int CurrentStage;
     // Start is called before the first frame update
     void Start()
     {

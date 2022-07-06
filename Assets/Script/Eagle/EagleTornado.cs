@@ -28,13 +28,15 @@ public class EagleTornado : SkillModel
         _isStarted = true;
         GameObject.Find("Eagle").GetComponent<EagleSkill>().SkillRunnig = false;
         GameObject.Find("Eagle").GetComponent<EagleSkill>().IsDelay = false;
+        GameObject.Find("Eagle").GetComponent<Animator>().SetBool("IsTornadoOn", false);
+        GameObject.Find("Eagle").GetComponent<AudioSource>().Stop();
         gameObject.SetActive(false);
         
     }
 
     public override void Cast()
     {
-        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(1f, 0.5f, -Camera.main.transform.position.z));        
+        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, -Camera.main.transform.position.z));        
     }
 
     public void Update()

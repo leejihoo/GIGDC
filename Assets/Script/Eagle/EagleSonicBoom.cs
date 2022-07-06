@@ -8,7 +8,6 @@ public class EagleSonicBoom : SkillModel
     private bool _firstTargetPosition;
     private bool _secondTargetPosition;
     private bool _thirdTargetPosition;
-    private bool _finalTargetPosition;
     private Vector3 _firstPosition;
     public EagleSonicBoom()
     {
@@ -59,18 +58,20 @@ public class EagleSonicBoom : SkillModel
         }
 
         var finalDir = _firstPosition - GameObject.Find("Eagle").transform.position;
-        if (finalDir.magnitude >= 0.1f && !_finalTargetPosition && _thirdTargetPosition)
+        if (finalDir.magnitude >= 0.1f  && _thirdTargetPosition)
         {
             this.transform.parent.transform.Translate(finalDir.normalized * Time.deltaTime * _speed);
         }
         
-        if(finalDir.magnitude < 0.1f)
+        if(finalDir.magnitude < 0.1f && _thirdTargetPosition)
         {
             GameObject.Find("Eagle").GetComponent<EagleSkill>().SkillRunnig = false;
             GameObject.Find("Eagle").GetComponent<EagleSkill>().IsDelay = false;
             _firstTargetPosition = false;
             _secondTargetPosition = false;
             _thirdTargetPosition = false;
+            GameObject.Find("Eagle").GetComponent<Animator>().SetBool("IsSonicBoomOn", false);
+            GameObject.Find("Eagle").GetComponent<AudioSource>().Stop();
             gameObject.SetActive(false);
         }
     }

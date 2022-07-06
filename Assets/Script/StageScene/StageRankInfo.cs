@@ -81,6 +81,7 @@ public class StageRankInfo : MonoBehaviour
 
     public void ClickStartBtn()
     {
-        SceneManager.LoadScene("BattleScene");
+        Loading.LoadScene("BattleScene");
+        //SceneManager.LoadScene("BattleScene");
     }
 }

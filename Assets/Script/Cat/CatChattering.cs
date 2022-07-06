@@ -32,7 +32,7 @@ public class CatChattering : SkillModel
 
                 if (_dir.magnitude >= 0.1f)
                 {
-                    this.transform.parent.transform.Translate(_dir.normalized * Time.deltaTime * _speed);
+                    GameObject.Find("Cat").transform.Translate(_dir.normalized * Time.deltaTime * _speed);
                 }
             //} 
         }
@@ -49,8 +49,8 @@ public class CatChattering : SkillModel
     public override void Cast()
     {
         _speed = 5;
-        gameObject.transform.SetParent(GameObject.Find("Cat").transform);
-        gameObject.transform.localPosition = Vector3.zero;
+        //gameObject.transform.SetParent(GameObject.Find("Cat").transform);
+        //gameObject.transform.localPosition = Vector3.zero;
         _firstPosition = GameObject.Find("Cat").transform.position;
         _skillRunning = false;
         StartCoroutine(ContinueSkill());
@@ -66,9 +66,11 @@ public class CatChattering : SkillModel
         GameObject.Find("Cat").transform.position = _firstPosition + new Vector3(20,0,0);
         yield return new WaitForSeconds(1);
 
-        GameObject.Find("Cat").transform.position = _firstPosition;
-        
+        GameObject.Find("Cat").transform.position = _firstPosition; 
+
         //GameObject.Find("GlobalLight").GetComponent<Light2D>().intensity = 1;
+        GameObject.Find("Cat").GetComponent<Animator>().SetBool("IsChatteringOn", false);
+        GameObject.Find("Cat").GetComponent<AudioSource>().Stop();
         gameObject.SetActive(false);
     }
 

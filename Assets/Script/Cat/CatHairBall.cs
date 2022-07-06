@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CatHairBall : SkillModel
 {
-    int a;
+
     public CatHairBall()
     {
         
@@ -12,7 +12,7 @@ public class CatHairBall : SkillModel
     // Start is called before the first frame update
     void Start()
     {
-   
+
     }
 
     // Update is called once per frame
@@ -23,15 +23,20 @@ public class CatHairBall : SkillModel
     public override void Cast()
     {
         gameObject.transform.SetParent(GameObject.Find("Cat").transform);
-        //gameObject.transform.localPosition = Vector3.zero;
+        //this.GetComponent<ParticleSystem>().collision.AddPlane(GameObject.Find("RightWall").transform);
+        //this.GetComponent<ParticleSystem>().collision.AddPlane(GameObject.Find("LeftWall").transform);
+        //this.GetComponent<ParticleSystem>().collision.AddPlane(GameObject.Find("BottomWall").transform);
+        //this.GetComponent<ParticleSystem>().collision.AddPlane(GameObject.Find("UpWall").transform);
         StartCoroutine(ContinueSkill());
     }
 
     IEnumerator ContinueSkill()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(5); 
         GameObject.Find("Cat").GetComponent<CatSkill>().SkillRunnig = false;
-        GameObject.Find("Cat").GetComponent<CatSkill>().IsDelay = false;
+        GameObject.Find("Cat").GetComponent<CatSkill>().IsDelay = false; 
+        GameObject.Find("Cat").GetComponent<Animator>().SetBool("IsHairBallOn", false);
+        GameObject.Find("Cat").GetComponent<AudioSource>().Stop();
         gameObject.SetActive(false);
     }
 }

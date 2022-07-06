@@ -48,9 +48,13 @@ public class EagleBladecaller : SkillModel
                 _isDelay = true;
                 GameObject.Find("Eagle").GetComponent<EagleSkill>().IsDelay = false;
             }
+            GameObject.Find("Eagle").GetComponent<Animator>().SetBool("IsFeatherBladeOn", false);
+
             _isCalled = false;
             _isCurved = false;
             _isStarted = false;
+            this.GetComponent<SpriteRenderer>().flipX = false;
+            GameObject.Find("Eagle").GetComponent<AudioSource>().Stop();
             gameObject.SetActive(false);
         }
     }
@@ -59,6 +63,8 @@ public class EagleBladecaller : SkillModel
     {
         _isStarted = true;
         yield return new WaitForSeconds(5);
+        GameObject.Find("Eagle").GetComponent<AudioSource>().Play();
+        this.GetComponent<SpriteRenderer>().flipX = true;
         _isCalled = true;
     }
 

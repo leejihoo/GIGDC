@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 8719871833004603727}
   - component: {fileID: 8719871833004603724}
   - component: {fileID: 8719871833004603721}
-  - component: {fileID: 5648051944303866853}
+  - component: {fileID: 739374640}
   m_Layer: 0
   m_Name: Feather
-  m_TagString: Untagged
+  m_TagString: Eagle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8719871833004603725}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.29, y: -0.07, z: 0}
-  m_LocalScale: {x: 0.23, y: 0.12, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6778dfd9d9c6e4c14af80f570b0f88ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -205,24 +205,79 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!50 &5648051944303866853
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!60 &739374640
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8719871833004603725}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 0.99}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.1999999, y: -0.275}
+      - {x: 1.4, y: -0.255}
+      - {x: 1.56, y: -0.225}
+      - {x: 1.8399999, y: -0.145}
+      - {x: 1.9699999, y: -0.085}
+      - {x: 2, y: -0.024999999}
+      - {x: 2, y: 0.055}
+      - {x: 1.9699999, y: 0.13499999}
+      - {x: 1.91, y: 0.205}
+      - {x: 1.76, y: 0.205}
+      - {x: 1.4699999, y: 0.035}
+      - {x: 1.15, y: -0.035}
+      - {x: 0.94, y: -0.044999998}
+      - {x: 0.9, y: 0.175}
+      - {x: 0.78999996, y: 0.305}
+      - {x: 0.76, y: 0.295}
+      - {x: 0.68, y: 0.345}
+      - {x: 0.58, y: 0.355}
+      - {x: 0.56, y: 0.315}
+      - {x: 0.56, y: 0.205}
+      - {x: 0.47, y: 0.295}
+      - {x: 0.41, y: 0.345}
+      - {x: 0.22999999, y: 0.445}
+      - {x: 0.03, y: 0.49499997}
+      - {x: -0.45, y: 0.49499997}
+      - {x: -0.65999997, y: 0.45499998}
+      - {x: -0.88, y: 0.405}
+      - {x: -1.13, y: 0.305}
+      - {x: -1.54, y: 0.085}
+      - {x: -1.6899999, y: 0.024999999}
+      - {x: -1.99, y: -0.065}
+      - {x: -2, y: -0.095}
+      - {x: -2, y: -0.155}
+      - {x: -1.9799999, y: -0.16499999}
+      - {x: -1.8299999, y: -0.24499999}
+      - {x: -1.36, y: -0.36499998}
+      - {x: -0.90999997, y: -0.42499998}
+      - {x: -0.68, y: -0.45499998}
+      - {x: -0.56, y: -0.465}
+      - {x: -0.34, y: -0.475}
+      - {x: -0.01, y: -0.475}
+      - {x: 0.29999998, y: -0.42499998}
+      - {x: 0.42, y: -0.39499998}
+      - {x: 0.41, y: -0.445}
+      - {x: 0.45, y: -0.48499998}
+      - {x: 0.53, y: -0.48499998}
+      - {x: 0.61, y: -0.49499997}
+      - {x: 0.74, y: -0.49499997}
+      - {x: 0.82, y: -0.39499998}
+      - {x: 0.90999997, y: -0.255}
+      - {x: 0.97999996, y: -0.265}

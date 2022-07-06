@@ -14,7 +14,8 @@ public class EagleSkill : MonoBehaviour
     private GameObject _fly;
     private GameObject _tornado;
     private GameObject _sonicBoom;
-    
+    [SerializeField]
+    private List<AudioClip> _skillMusics = new List<AudioClip>();
 
     enum skillType
     {
@@ -69,9 +70,12 @@ public class EagleSkill : MonoBehaviour
         yield return new WaitForSeconds(2);
         var randomSkillIndex = Random.Range(0, 4);
         //var randomSkillIndex = 3;
+        this.GetComponent<AudioSource>().clip = _skillMusics[randomSkillIndex];
+        this.GetComponent<AudioSource>().Play();
         switch (randomSkillIndex)
         {
             case (int)skillType.FEATHER:
+                gameObject.GetComponent<Animator>().SetBool("IsFeatherBladeOn", true);
                 UnityEngine.Debug.Log("feather");
                 foreach (var feather in _feathers)
                 {
@@ -80,19 +84,22 @@ public class EagleSkill : MonoBehaviour
                 }
                 SkillRunnig = true;
                 break;
-            case (int)skillType.TORNADO:
-                UnityEngine.Debug.Log("_tornado");
-                _tornado.SetActive(true);
-                _tornado.GetComponent<EagleTornado>().Cast();
-                SkillRunnig = true;
-                break;
             case (int)skillType.FLY:
+                gameObject.GetComponent<Animator>().SetBool("IsFlyOn", true);
                 UnityEngine.Debug.Log("_fly");
                 _fly.SetActive(true);
                 _fly.GetComponent<EagleFly>().Cast();
                 SkillRunnig = true;
                 break;
+            case (int)skillType.TORNADO:
+                gameObject.GetComponent<Animator>().SetBool("IsTornadoOn", true);
+                UnityEngine.Debug.Log("_tornado");
+                _tornado.SetActive(true);
+                _tornado.GetComponent<EagleTornado>().Cast();
+                SkillRunnig = true;
+                break;
             case (int)skillType.SONICBOOM:
+                gameObject.GetComponent<Animator>().SetBool("IsSonicBoomOn", true);
                 UnityEngine.Debug.Log("_sonicBoom");
                 _sonicBoom.SetActive(true);
                 _sonicBoom.GetComponent<EagleSonicBoom>().Cast();

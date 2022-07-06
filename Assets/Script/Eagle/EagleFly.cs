@@ -17,7 +17,7 @@ public class EagleFly : SkillModel
 
     public override void Cast()
     {
-        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), 10));
+        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.2f, 0.6f), Random.Range(0.2f, 0.8f), 10));
         if (!_isStart)
         {
             StartCoroutine(Landing());
@@ -28,10 +28,14 @@ public class EagleFly : SkillModel
     {
         _isStart = true;
         yield return new WaitForSeconds(3);
+        gameObject.GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(1);
         this.transform.GetComponent<CircleCollider2D>().enabled = true;
         GameObject.Find("Eagle").GetComponent<EagleSkill>().SkillRunnig = false;
         GameObject.Find("Eagle").GetComponent<EagleSkill>().IsDelay = false;
+        GameObject.Find("Eagle").GetComponent<Animator>().SetBool("IsFlyOn", false);
         _isStart = false;
+        GameObject.Find("Eagle").GetComponent<AudioSource>().Stop();
         gameObject.SetActive(false);
     }
 

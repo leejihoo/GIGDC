@@ -12,6 +12,8 @@ public class CatSkill : MonoBehaviour
     private GameObject _chattering;
     private GameObject _grooming;
     private GameObject _hairBall;
+    [SerializeField]
+    private List<AudioClip> _skillMusics = new List<AudioClip>();
 
     enum skillType
     {
@@ -45,29 +47,35 @@ public class CatSkill : MonoBehaviour
     {
         IsDelay = true;
         yield return new WaitForSeconds(2);
-        var randomSkillIndex = Random.Range(0, 4);
-        //var randomSkillIndex = 3;
+        //var randomSkillIndex = Random.Range(0, 4);
+        var randomSkillIndex = 2;
+        this.GetComponent<AudioSource>().clip = _skillMusics[randomSkillIndex];
+        this.GetComponent<AudioSource>().Play();
         switch (randomSkillIndex)
         {
             case (int)skillType.ASSASSINATION:
+                gameObject.GetComponent<Animator>().SetBool("IsAssassinationOn", true);
                 UnityEngine.Debug.Log("_assassination");
                 _assassination.SetActive(true);
                 _assassination.GetComponent<CatAssassination>().Cast();  
                 SkillRunnig = true;
                 break;
             case (int)skillType.CHATTERING:
+                gameObject.GetComponent<Animator>().SetBool("IsChatteringOn", true);
                 UnityEngine.Debug.Log("_chattering");
                 _chattering.SetActive(true);
                 _chattering.GetComponent<CatChattering>().Cast();
                 SkillRunnig = true;
                 break;
             case (int)skillType.GROOMING:
+                gameObject.GetComponent<Animator>().SetBool("IsGroomingOn", true);
                 UnityEngine.Debug.Log("_grooming");
                 _grooming.SetActive(true);
                 _grooming.GetComponent<CatGrooming>().Cast();
                 SkillRunnig = true;
                 break;
             case (int)skillType.HAIRBALL:
+                gameObject.GetComponent<Animator>().SetBool("IsHairBallOn", true);
                 UnityEngine.Debug.Log("_hairBall");
                 _hairBall.SetActive(true);
                 _hairBall.GetComponent<CatHairBall>().Cast();

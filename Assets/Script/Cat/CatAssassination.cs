@@ -99,6 +99,8 @@ public class CatAssassination : SkillModel
         yield return new WaitForSeconds(1);
         GameObject.Find("Cat").transform.position = _firstPosition;
         //GameObject.Find("GlobalLight").GetComponent<Light2D>().intensity = 1;
+        GameObject.Find("Cat").GetComponent<Animator>().SetBool("IsAssassinationOn", false);
+        GameObject.Find("Cat").GetComponent<AudioSource>().Stop();
         gameObject.SetActive(false);
     }
 

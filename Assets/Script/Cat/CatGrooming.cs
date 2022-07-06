@@ -31,7 +31,12 @@ public class CatGrooming : SkillModel
         if(_shield <= 0)
         {
             _shield = 30;
+            gameObject.GetComponentInParent<Cat>().Hp -= 30;
             _isStart = false;
+            GameObject.Find("Cat").GetComponent<CatSkill>().SkillRunnig = false;
+            GameObject.Find("Cat").GetComponent<CatSkill>().IsDelay = false;
+            GameObject.Find("Cat").GetComponent<Animator>().SetBool("IsGroomingOn", false);
+            GameObject.Find("Cat").GetComponent<AudioSource>().Stop();
             gameObject.SetActive(false);
         }
     }
@@ -45,12 +50,19 @@ public class CatGrooming : SkillModel
         GameObject.Find("Cat").GetComponent<CatSkill>().IsDelay = false;
 
         _isStart = false;
+        GameObject.Find("Cat").GetComponent<Animator>().SetBool("IsGroomingOn", false);
+        GameObject.Find("Cat").GetComponent<AudioSource>().Stop();
         gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 유저의 총알에 맞았을 때
-        _shield -= 1;
+        if (collision.CompareTag("Player"))
+        {
+            this.GetComponent<Animator>().SetTrigger("IsDamaged");
+            // 유저의 총알에 맞았을 때
+            _shield -= 1;
+        }
+        
     }
 }
