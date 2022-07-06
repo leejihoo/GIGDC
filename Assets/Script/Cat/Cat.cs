@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class Cat : Boss
 {
-
+    Animator animator;
+    private void Start() {
+        animator = this.GetComponent<Animator>();
+    }
     public Cat()
     {
         Hp = 500;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

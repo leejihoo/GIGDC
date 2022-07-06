@@ -333,6 +333,7 @@ MonoBehaviour:
   Name: 
   ProjectileSpeed: 0
   Hp: 500
+  animator: {fileID: 2776021466767793959}
 --- !u!114 &2776021466767793957
 MonoBehaviour:
   m_ObjectHideFlags: 0

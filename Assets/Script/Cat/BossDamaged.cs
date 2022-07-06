@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class BossDamaged : MonoBehaviour
 {
+    Animator anim;
+    private void Start() {
+        anim = GetComponent<Animator>();
+    }
 
     public void Damaged()
     {
+        anim.SetTrigger("hit");
         if(this.GetComponent<Boss>().Hp <= 0)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("GameClearScene");
         }
         this.GetComponent<Boss>().Hp -= 1;
-        Debug.Log("º¸½ºÃ¼·Â°¨¼Ò: " + this.GetComponent<Boss>().Hp);
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½Â°ï¿½ï¿½ï¿½: " + this.GetComponent<Boss>().Hp);
     }
 
     public void OnTriggerEnter2D(Collider2D other)
